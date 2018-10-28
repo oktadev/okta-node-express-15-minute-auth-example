@@ -28,7 +28,8 @@ const oidc = new ExpressOIDC({
 
 app.use(oidc.router)
 
-// @TODO add registration page
+app.use('/register', require('./routes/register'))
+
 // @TODO add logout route
 
 app.use('/', require('./routes/index'))

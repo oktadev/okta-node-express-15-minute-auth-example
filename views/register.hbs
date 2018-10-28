@@ -1,0 +1,16 @@
+<form method="post">
+  {{#each fields}}
+    <div class="form-group">
+      <label>{{this.label}}</label>
+      <input
+        required
+        name="{{this.name}}"
+        type="{{this.type}}"
+        class="form-control {{#if this.error}}is-invalid{{/if}}"
+        value="{{this.value}}"
+      />
+      <div class="invalid-feedback">{{this.error}}</div>
+    </div>
+  {{/each}}
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
