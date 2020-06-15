@@ -1,35 +1,35 @@
-const okta = require('@okta/okta-sdk-nodejs')
-const express = require('express')
+const okta = require('@okta/okta-sdk-nodejs');
+const express = require('express');
 
-const router = express.Router()
+const router = express.Router();
 
 const client = new okta.Client({
   orgUrl: process.env.OKTA_ORG_URL,
   token: process.env.OKTA_TOKEN
-})
+});
 
-// Take the user to the home page if they're already logged in
+// Take the user to the homepage if they're already logged in
 router.use('/', (req, res, next) => {
   if (req.userContext) {
-    return res.redirect('/')
+    return res.redirect('/');
   }
 
-  next()
-})
+  next();
+});
 
 const fields = [
   { name: 'firstName', label: 'First Name' },
   { name: 'lastName', label: 'Last Name' },
   { name: 'email', label: 'Email', type: 'email' },
   { name: 'password', label: 'Password', type: 'password' }
-]
+];
 
 router.get('/', (req, res) => {
-  res.render('register', { fields })
-})
+  res.render('register', { fields });
+});
 
 router.post('/', async (req, res) => {
-  const { body } = req
+  const { body } = req;
 
   try {
     await client.createUser({
@@ -44,16 +44,16 @@ router.post('/', async (req, res) => {
           value: body.password
         }
       }
-    })
+    });
 
-    res.redirect('/')
+    res.redirect('/');
   } catch ({ errorCauses }) {
-    const errors = {}
+    const errors = {};
 
     errorCauses.forEach(({ errorSummary }) => {
-      const [, field, error] = /^(.+?): (.+)$/.exec(errorSummary)
-      errors[field] = error
-    })
+      const [, field, error] = /^(.+?): (.+)$/.exec(errorSummary);
+      errors[field] = error;
+    });
 
     res.render('register', {
       errors,
@@ -62,8 +62,8 @@ router.post('/', async (req, res) => {
         error: errors[field.name],
         value: body[field.name]
       }))
-    })
+    });
   }
-})
+});
 
-module.exports = router
+module.exports = router;
