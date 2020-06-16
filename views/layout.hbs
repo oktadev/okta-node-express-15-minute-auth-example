@@ -20,7 +20,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             {{#if userContext}}
-              <a class="nav-item nav-link" href="/logout">Log out</a>
+              <form method="POST" action="/logout">
+                <button type="submit" class="btn btn-link nav-item nav-link">Logout</button>
+              </form>
             {{else}}
               <a class="nav-item nav-link" href="/login">Log in</a>
               <a class="nav-item nav-link" href="/register">Register</a>
