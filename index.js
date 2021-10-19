@@ -17,7 +17,7 @@ app.use(
     saveUninitialized: false
   })
 );
-  
+
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const oidc = new ExpressOIDC({
   appBaseUrl: process.env.HOST_URL,
@@ -29,10 +29,10 @@ const oidc = new ExpressOIDC({
   routes: {
     loginCallback: {
       path: '/callback'
-    },
+    }
   }
 });
-  
+
 app.use(oidc.router);
 
 app.use('/', require('./routes/index'));
