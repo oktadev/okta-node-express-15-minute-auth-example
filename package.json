@@ -11,7 +11,7 @@
   "author": "",
   "license": "Apache 2.0",
   "dependencies": {
-    "@okta/oidc-middleware": "^4.3.0",
+    "@okta/oidc-middleware": "^5.0.0",
     "@okta/okta-sdk-nodejs": "^5.0.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
